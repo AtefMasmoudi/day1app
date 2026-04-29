@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-app = FastAPI ()
-@app . get ("/")
-def app ():
-    return " Live from production !"
+app = FastAPI()
+@app.get ("/")
+def app():
+    return "Live from production !"
