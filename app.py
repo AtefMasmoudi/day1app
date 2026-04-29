@@ -34,5 +34,5 @@ def root():
         messages=messages
     )
     reply = response.choices[0].message.content.replace("\n", "<br/>")
-    html = f"<html><head><title>Live in an Instant!</title></head><body><p>{reply}</p></body></html>"
+    html = f"<html><head><title>Itech University!</title></head><body><p>{reply}</p></body></html>"
     return html
