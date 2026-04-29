@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from groq import Groq
 from dotenv import load_dotenv
+import markdown
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,6 +34,22 @@ def root():
         model="llama-3.1-8b-instant",
         messages=messages
     )
-    reply = response.choices[0].message.content.replace("\n", "<br/>")
-    html = f"<html><head><title>Itech University!</title></head><body><p>{reply}</p></body></html>"
-    return html
+
+    md_reply = response.choices[0].message.content
+    html_reply = markdown.markdown(md_reply)
+    
+    full_html = f"""
+    <html>
+        <head><title>Itech University - Live!</title></head>
+        <body style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
+            {html_reply}
+        </body>
+    </html>
+    """
+    return HTMLResponse(content=full_html)
+
+    #reply = response.choices[0].message.content.replace("\n", "<br/>")
+    #html = f"<html><head><title>Itech University!</title></head><body><p>{reply}</p></body></html>"
+    #return html
+
+
